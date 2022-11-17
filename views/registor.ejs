@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register Form</title>
+        <link href="stylesheets/main.css" rel="stylesheet" />
+		<link href="stylesheets/registor.css" rel="stylesheet" />
+		<script>
+			function check(){
+				const password = document.querySelector('[name="password"]').value;
+				if (password.length < 8) {
+					alert("최소 8자리 이상의 비밀번호를 설정 해 주세요");
+					return false;
+				}
+				const passwordConfirm = document.querySelector('[name="password2"]').value;
+				if (password != passwordConfirm) {
+					alert("비밀번호 확인이 일치하지 않습니다");
+					return false;
+				}
+				return true;
+			}
+		</script>
+	</head>
+	<body class="bg-light">
+		<!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="/"><img src = 'images/logo.gif' width="110" height="25"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<!-- Registor-->
+		<div class="register-form bg-registor">
+			<h1>Register Form</h1>
+			<form id ='registor' action="/registor" method="POST" onsubmit="return check();">
+				<input class ="information" type="text" name="ID" placeholder="ID" required>
+				<input class ="information" type="password" name="password" placeholder="Password" required>
+				<input class ="information" type="password" name="password2" placeholder="Password" required>
+				<input class ="information" type="email" name="email" placeholder="email" required>
+				<input class ="registor bg-wimos" type="submit" value="Register">
+			</form>
+			<p>
+			<a href="/login"><button class = "button bg-wimos">Goto Login</button></a>
+			<p>
+			<a href="/"><button class = "button bg-wimos">For Guest Only</button></a>
+		</div>
+	</body>
+</html>
