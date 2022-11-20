@@ -43,12 +43,6 @@ app.set('view engine','ejs'); // 템플릿 엔진에 ejs 이용하기 위한 설
 app.get('/',(req, res)=>{
     let query = "SELECT * from furniture Order by rand()";
     if(req.session.loggedin == true){
-        // const[,privateKey] = req.headers.cookie.split('=');
-        // const userInfo = session[privateKey];
-        // res.render('main_u',{
-        //     isLogin:true,
-        //     // userInfo,
-        // });
         con.query(query, (err, result)=>{
             err ? res.send(err) : res.render("main_u", {data: result});
         })
@@ -63,28 +57,58 @@ app.get('/',(req, res)=>{
 
 //필터링 페이지
 app.get('/Modern',(req, res)=>{
-    let query = "SELECT * from furniture where label='모던시크' Order by rand()";    
-    con.query(query, (err, result)=>{
-        err ? res.send(err) : res.render("main", {data: result});
-    })
+
+    let query = "SELECT * from furniture where label='모던시크' Order by rand()";
+    if(req.session.loggedin == true){
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main_u", {data: result});
+        })
+    }else{
+        let query = "SELECT * from furniture Order by rand()";
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main", {data: result});
+        })
+    }
+
 });
-app.get('/Retro',(req, res)=>{
-    let query = "SELECT * from furniture where label='레트로' Order by rand()";    
-    con.query(query, (err, result)=>{
-        err ? res.send(err) : res.render("main", {data: result});
-    })
+app.get('/Retro',(req, res)=>{  
+    let query = "SELECT * from furniture where label='레트로' Order by rand()";
+    if(req.session.loggedin == true){
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main_u", {data: result});
+        })
+    }else{
+        let query = "SELECT * from furniture Order by rand()";
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main", {data: result});
+        })
+    }
 });
 app.get('/Romantic',(req, res)=>{
     let query = "SELECT * from furniture where label='로맨틱' Order by rand()";    
-    con.query(query, (err, result)=>{
-        err ? res.send(err) : res.render("main", {data: result});
-    })
+    if(req.session.loggedin == true){
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main_u", {data: result});
+        })
+    }else{
+        let query = "SELECT * from furniture Order by rand()";
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main", {data: result});
+        })
+    }
 });
 app.get('/NorthernEurope',(req, res)=>{
     let query = "SELECT * from furniture where label='북유럽' Order by rand()";    
-    con.query(query, (err, result)=>{
-        err ? res.send(err) : res.render("main", {data: result});
-    })
+    if(req.session.loggedin == true){
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main_u", {data: result});
+        })
+    }else{
+        let query = "SELECT * from furniture Order by rand()";
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main", {data: result});
+        })
+    }
 });
 
 //로그인 페이지
@@ -97,7 +121,7 @@ app.post('/login',(req,res)=>{
     con.query('SELECT * FROM customer where id=? AND password = ?',[ID, password], function(err, results){
         if (err) throw err;
         if (results.length!=0){
-            req.session.id = ID;
+            req.session.userid = ID;
             req.session.loggedin = true;
             res.send("<script>location.href='/'</script>");
         }else{
@@ -139,5 +163,8 @@ app.get('/community',(req, res)=>{
 });
 
 //마이페이지
+app.get('/mypage',(req, res)=>{
+    res.render('mypage')
+});
 
 app.listen(port,()=>console.log(`Example app listening on port ${port}!`));
