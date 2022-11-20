@@ -4,26 +4,30 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 const session = require('express-session')
+const MySQLStore = require('express-mysql-session')(session);
 const { response } = require('express')
+//비밀번호 암호화
 // const hash = crypto.createHAhs('sha1');
 // hash.update(password);
 // hash.digest('hex');
-
-const app = express()
-const port = 3000
-
-
-const con = mysql.createConnection({
+var options = {
     host:'localhost',
     user:'root',
     password:'DLguswls11!!',
     database:'my_db'
-});
+}
+
+const con = mysql.createConnection(options)
+
+const app = express()
+const port = 3000
+const sessionStore = new MySQLStore(options);
 
 app.use(session({
-    secret:'secret',
+    secret:'guswlscodnjs',
     resave:false,
-    saveUninitialized:false
+    saveUninitialized:true,
+    store:sessionStore
 }));
 
 con.connect(function(err){
@@ -38,12 +42,23 @@ app.set('view engine','ejs'); // 템플릿 엔진에 ejs 이용하기 위한 설
 //메인 페이지
 app.get('/',(req, res)=>{
     let query = "SELECT * from furniture Order by rand()";
-    // if (filtervalue != 'all'){
-    //     query = `SELECT * from test where label='${filtervalue}'`;
-    // }
-    con.query(query, (err, result)=>{
-        err ? res.send(err) : res.render("main", {data: result});
-    })
+    if(req.session.loggedin == true){
+        // const[,privateKey] = req.headers.cookie.split('=');
+        // const userInfo = session[privateKey];
+        // res.render('main_u',{
+        //     isLogin:true,
+        //     // userInfo,
+        // });
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main_u", {data: result});
+        })
+    }else{
+        let query = "SELECT * from furniture Order by rand()";
+        con.query(query, (err, result)=>{
+            err ? res.send(err) : res.render("main", {data: result});
+        })
+    }
+    
 });
 
 //필터링 페이지
@@ -76,6 +91,21 @@ app.get('/NorthernEurope',(req, res)=>{
 app.get('/login',(req, res)=>{
     res.render("login");
 });
+app.post('/login',(req,res)=>{
+    const ID = req.body.ID;
+    const password = req.body.password;
+    con.query('SELECT * FROM customer where id=? AND password = ?',[ID, password], function(err, results){
+        if (err) throw err;
+        if (results.length!=0){
+            req.session.id = ID;
+            req.session.loggedin = true;
+            res.send("<script>location.href='/'</script>");
+        }else{
+            res.send("<script>alert('다시 입력해주세요');location.href='/login'</script>");
+        }
+    })
+})
+
 //회원가입 페이지
 app.get('/registor',(req, res)=>{
     res.render("registor");
@@ -96,10 +126,16 @@ app.post('/registor', (req, res)=>{
         };     
     });
 });
+
+//로그아웃
+app.get('/logout',(req, res)=>{
+    req.session.loggedin = false;
+    res.send("<script>location.href='/'</script>");
+})
    
 //커뮤니티 페이지
 app.get('/community',(req, res)=>{
-    res.render("index");
+    res.render("main");
 });
 
 //마이페이지
