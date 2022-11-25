@@ -158,8 +158,46 @@ app.get('/logout',(req, res)=>{
 })
    
 //커뮤니티 페이지
-app.get('/community',(req, res)=>{
-    res.render("main");
+// 데이터 조회​
+app.get('/community/:page', function(req, res, next) {
+    var page = req.params.page;
+    var sql = "select idx, name, title, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate, " +
+        "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate from board";
+    con.query(sql, function (err, rows) {
+        if (err) console.error("err : " + err);
+        res.render('list', {title: '게시판 리스트', rows: rows});
+    });
+});
+
+app.get('/community', function(req, res, next) {
+    res.redirect('/community/1');
+});
+
+  // 데이터 추가​
+  app.get('/create',(req, res)=>{
+    res.render("write",{title : "게시판 글 쓰기"});
+});
+
+app.post('/create', (req, res)=>{
+    const name = req.body.name;
+    const title = req.body.title;
+    const content = req.body.content;
+    const passwd = req.body.passwd;
+    con.query('insert into board(name, title, content, regdate, modidate, passwd,hit) values(?,?,?,now(),now(),?,0)',[name, title, content, passwd])
+    res.send("<script>location.href='/community'</script>");
+        
+    });
+    
+app.get('/read/:idx',function(req,res,next)
+{
+var idx = req.params.idx;
+    var sql = "select idx, name, title, content, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate, " +
+        "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate,hit from board where idx=?";
+    con.query(sql,[idx], function(err,row)
+    {
+        if(err) console.error(err);
+        res.render('read', {title:"글 상세", row:row[0]});
+    });
 });
 
 //마이페이지
