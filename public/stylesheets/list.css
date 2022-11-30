@@ -1,0 +1,72 @@
+.listtable {
+    width:80%; 
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top : 8%;
+    border-collapse: collapse;
+    line-height: 1.5;
+    background-color: #FFFFFF;
+}
+
+.listtable thead th {
+    padding: 10px;
+    font-weight: bold;
+    text-align:center;
+    vertical-align: top;
+    /* color: #FFFFFF; */
+    background-color:#EAEAEA;
+    border-bottom: 3px solid #2D1600;
+}
+
+.listtable tbody th {
+padding: 10px;
+font-weight: bold;
+text-align:center;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
+/* background-color:#FAECC5; */
+}
+
+.listtable thead td {
+padding: 10px;
+font-weight: bold;
+text-align:center;
+vertical-align: top;
+/* color: #873e87; */
+background-color:#EAEAEA;
+border-bottom: 3px solid #2D1600;
+}
+
+.listtable tbody td {
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.listbtn {
+    width:80%;
+    float:right;
+    margin-left: auto;
+    margin-top:10rem;
+}
+
+.goto:hover {
+    text-decoration: underline;
+}
+
+.title{
+    /* width:80%; */
+    float:left;
+    /* text-align:left; */
+    /* margin-left:10%; */
+    /* margin-right:auto; */
+    /* margin-top:2rem; */
+    /* background-color:#2D1600; */
+    
+    /* margin-top:3rem; */
+}
+.write{
+    float:left;
+    margin-left:2%;
+    margin-top:0.5rem;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title><%= title %></title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="stylesheets/main.css" rel="stylesheet" />
+        <link href="stylesheets/list.css" rel="stylesheet" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="javascripts/scripts.js"></script>
+        <sciprt src="../jquery-3.6.1.min.js"></sciprt>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a href="/"><img src = 'images/logo.gif' width="110" height="25"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/community">Community</a></li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-outline-dark fw-bolder filter" type="submit" href ="login">LogIN</a>
+                        <a class="btn btn-outline-dark fw-bolder filter" type="submit" href="registor">SingUP</a>
+                        <!-- <li class="btn btn-outline-dark fw-bolder">LogIN</li> -->
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!--contents-->
+        <!-- <h1 class="display-4 fw-bolder"></h1> -->
+        
+        <header class="bg-wimos py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder"><%= title %></h1>
+                </div>
+            </div>
+        </header>
+        <div style="float:right; margin-right:10%; padding-top:3%;">
+            <a class="btn btn-outline-dark fw-bolder" href="/create">글쓰기</a>
+        </div>
+        <table class="listtable table table-striped table-bordered" border="1" >
+            <tr>
+                <td>번호</td>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>조회수</td>
+                <td>수정일</td>
+                <td>등록일</td>
+            </tr>
+            
+            <%
+            for(var i=0; i<rows.length; i++)
+            {
+                var data = rows[i];
+            %>
+            <tr>
+                <td><%=data.idx%></td>
+                <td><%=data.name%></td>
+                <td><a href="/read/<%=data.idx%>"><%=data.title%></a></td>
+                <td><%=data.hit%></td>
+                <td><%=data.modidate%></td>
+                <td><%=data.regdate%></td>
+            </tr>
+            <%}%>
+        </table>
+        
+    </body>
+</html>
