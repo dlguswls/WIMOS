@@ -1,0 +1,48 @@
+.writetable {
+    width:80%; 
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top : 8%;
+    border-collapse: collapse;
+    line-height: 1.5;
+    background-color: #FFFFFF;
+}
+
+.writetable th {
+    width:10%;
+    padding: 10px;
+    font-weight: bold;
+    text-align:center;
+    vertical-align: top;
+    background-color:#EAEAEA;
+}
+
+.writetable td {
+padding: 10px;
+font-weight: bold;
+text-align:center;
+vertical-align: top;
+}
+
+.writetable td input{
+    width:100%;
+    border: #FFFFFF;
+}
+.writetable td textarea{
+    width:100%;
+    border: #FFFFFF;
+}    
+
+.listbtn {
+    width:80%;
+    float:right;
+    margin-left: auto;
+    margin-top:10rem;
+}
+.title{
+    float:left;
+}
+.write{
+    float:right;
+    margin-top:0.5rem;
+}
