@@ -2,38 +2,55 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link href="stylesheets/main.css" rel="stylesheet" />
+    <link href="stylesheets/write.css" rel="stylesheet" />
 </head>
 <body>
-<h1><%= title %></h1>
- 
- 
-<form action="/create" method="post">
-    <table border="1">
-        <tr>
-            <td>작성자</td>
-            <td><input type="text" name="name" id="name" required/></td>
-        </tr>
-        <tr>
-            <td>제목</td>
-            <td><input type="text" name="title" id="title" required/></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td><textarea name="content" id="content" cols="30" rows="10" required></textarea></td>
-        </tr>
-        <tr>
-            <td>패스워드</td>
-            <td><input type="password" name="passwd" id="passwd" required/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button type="submit">글쓰기</button>
-            </td>
-        </tr>
-    </table>
-</form>
- 
- 
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a href="/"><img src = 'images/logo.gif' width="110" height="25"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button> -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/community">Community</a></li>
+                </ul>
+                <form class="d-flex">
+                    <a class="btn btn-outline-dark fw-bolder filter" type="submit" href ="login">LogIN</a>
+                    <a class="btn btn-outline-dark fw-bolder filter" type="submit" href="registor">SingUP</a>
+                    <!-- <li class="btn btn-outline-dark fw-bolder">LogIN</li> -->
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div style="width:80%;margin-top:4%;margin-left:auto;margin-right:auto;">
+        <h1 class = 'title fw-bolder'><%= title %></h1>
+    </div>
+    <form action="/create" method="post">
+        <table class="writetable table-bordered fw-bolder" border="1">
+            <tr>
+                <th>작성자</th>
+                <td><input type="text" name="name" id="name" required/></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" id="title" required/></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea name="content" id="content" cols="30" rows="10" required></textarea></td>
+            </tr>
+            <tr>
+                <th>패스워드</th>
+                <td><input type="password" name="passwd" id="passwd" required/></td>
+            </tr>
+        </table>
+        <div style="width:80%;margin-left:auto;margin-right:auto;">
+            <button style="margin-left:1%" type="submit" class="btn btn-outline-dark fw-bolder write">글쓰기</button>
+            <a href="/community" class="btn btn-outline-dark fw-bolder write">목록</a>
+        </div>
+    </form>
 </body>
 </html>

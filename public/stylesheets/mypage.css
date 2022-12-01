@@ -4811,10 +4811,10 @@ textarea.form-control-lg {
   border: 1px solid #dee2e6;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-@media (prefers-reduced-motion: reduce) {
+/* @media (prefers-reduced-motion: reduce) {
   .page-link {
     transition: none;
-  }
+  } */
 }
 .page-link:hover {
   z-index: 2;
@@ -11343,7 +11343,7 @@ p.lead {
   outline-color: #d48a6e;
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   #sideNav {
     padding-left: 0;
     padding-right: 0;
@@ -11383,7 +11383,7 @@ p.lead {
   #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
     display: block;
   }
-}
+} */
 .social-icons .social-icon {
   display: inline-flex;
   align-items: center;
