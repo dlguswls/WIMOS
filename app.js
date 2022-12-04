@@ -158,7 +158,7 @@ app.get('/logout',(req, res)=>{
     res.send("<script>location.href='/'</script>");
 })
    
-//커뮤니티 페이지
+//게시판 페이지
 // 데이터 조회​
 app.get('/community', function(req, res, next) {
     // var page = req.params.page;
@@ -169,12 +169,7 @@ app.get('/community', function(req, res, next) {
         res.render('list', {title: '게시판 리스트', rows: rows});
     });
 });
-
-// app.get('/community', function(req, res, next) {
-//     res.redirect('/community/1');
-// });
-
-  // 데이터 추가​
+// 데이터 추가​
 app.get('/create',(req, res)=>{
     res.render("write",{title : "게시판 글 쓰기"});
 });
