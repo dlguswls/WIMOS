@@ -93,6 +93,13 @@
                 margin-top:0.5rem;
             }
         </style>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#modifybtn').click(function(){
+                    alert('글을 수정하시겠습니까?');
+            });});
+        </script>
     </head>
     <body>
         <div style="width:80%;margin-top:4%;margin-left:auto;margin-right:auto;">
@@ -111,7 +118,10 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea name="content" id="content" cols="30" rows="10" required><%=row.content%></textarea></td>
+                    <td>
+                        <img style="float:left;width:40rem;" src="<%=row.image%>" alt="image"/>
+                        <textarea style="font-size:1.5rem;" name="content" id="content" cols="30" rows="10" required><%=row.content%></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <th>패스워드</th>
@@ -131,7 +141,7 @@
                 </tr>
             </table>
             <div style="width:80%;margin-left:auto;margin-right:auto;">
-                <button style="margin-left:1%" type="submit" class="btn btn-outline-dark fw-bolder write">수정</button>
+                <button id="modifybtn" style="margin-left:1%" type="submit" class="btn btn-outline-dark fw-bolder write">수정</button>
                 <a href="/community" class="btn btn-outline-dark fw-bolder write">목록</a>
             </div>
         </form>

@@ -6,6 +6,7 @@ const ejs = require('ejs')
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session);
 const { response } = require('express')
+const multer = require("multer")
 //비밀번호 암호화
 // const hash = crypto.createHAhs('sha1');
 // hash.update(password);
@@ -174,26 +175,38 @@ app.get('/community', function(req, res, next) {
 // });
 
   // 데이터 추가​
-  app.get('/create',(req, res)=>{
+app.get('/create',(req, res)=>{
     res.render("write",{title : "게시판 글 쓰기"});
 });
 
-app.post('/create', (req, res)=>{
+var storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        cb('', "public/images/");
+    },
+    filename:function(req, file, cb){
+        const ext = path.extname(file.originalname);
+        cb('', path.basename(file.originalname, ext) + "-" + Date.now() + ext);
+    },
+});
+var upload = multer({storage:storage});
+app.post('/create', upload.single("image"), (req, res)=>{
     const name = req.body.name;
     const title = req.body.title;
     const content = req.body.content;
     const passwd = req.body.passwd;
-    var hit = req.body.hit;
-    con.query('insert into board(name, title, content, regdate, modidate, passwd,hit) values(?,?,?,now(),now(),?,0)',[name, title, content, passwd, hit])
+    const image = `/images/${req.file.filename}`;
+    const datas = [name, title, content, passwd, image];
+    const sql = `insert into board(name, title, content, regdate, modidate, passwd, hit, image) values(?,?,?,now(),now(),?, 0, ?)`
+    con.query(sql, datas)
     res.send("<script>location.href='/community'</script>");
-        
-    });
+})
+    
     
 app.get('/read/:idx',function(req,res,next)
 {
 var idx = req.params.idx;
     var sql = "select idx, name, title, content, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate, " +
-        "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate,hit from board where idx=?";
+        "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate,hit,image from board where idx=?";
     con.query(sql,[idx], function(err,row)
     {
         if(err) console.error(err);
@@ -210,7 +223,7 @@ var idx = req.params.idx;
 });
 
 //data 수정
-app.post('/update',function(req,res,next)
+app.post('/update',upload.single("image"),function(req,res,next)
 {
     var idx = req.body.idx;
     var name = req.body.name;
@@ -234,20 +247,6 @@ app.post('/update',function(req,res,next)
         }
     });
 });
-
-// //게시판 page 이동
-// app.get('/page/:page',function(req,res,next)
-// {
-//     var page = req.params.page;
-//     var sql = "select idx, name, title, date_format(modidate,'%Y-%m-%d %H:%i:%s') modidate, " +
-//         "date_format(regdate,'%Y-%m-%d %H:%i:%s') regdate,hit from board";
-//     con.query(sql, function (err, rows) {
-//         if (err) console.error("err : " + err);
-//         res.render('page', {title: ' 게시판 리스트', rows: rows, page:page, length:rows.length-1, page_num:10, pass:true});
-//         console.log(rows.length-1);
-//     });
-// });
-
 
 //마이페이지
 app.get('/mypage',(req, res)=>{
