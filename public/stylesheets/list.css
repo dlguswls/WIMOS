@@ -15,7 +15,8 @@
     vertical-align: top;
     /* color: #FFFFFF; */
     background-color:#EAEAEA;
-    border-bottom: 3px solid #2D1600;
+    border-bottom: 1px solid #2D1600;
+    border-left-color:#FFFFFF;
 }
 
 .listtable tbody th {
@@ -24,7 +25,7 @@ font-weight: bold;
 text-align:center;
 vertical-align: top;
 border-bottom: 1px solid #ccc;
-/* background-color:#FAECC5; */
+border-left-color:#FFFFFF;
 }
 
 .listtable thead td {
@@ -34,7 +35,7 @@ text-align:center;
 vertical-align: top;
 /* color: #873e87; */
 background-color:#EAEAEA;
-border-bottom: 3px solid #2D1600;
+border-bottom: 1px solid #2D1600;
 }
 
 .listtable tbody td {
