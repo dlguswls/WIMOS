@@ -171,7 +171,7 @@ app.get('/community', function(req, res, next) {
 });
 // 데이터 추가​
 app.get('/create',(req, res)=>{
-    res.render("write",{title : "게시판 글 쓰기"});
+    res.render("write",{title : "커뮤니티 글 쓰기"});
 });
 
 var storage = multer.diskStorage({
