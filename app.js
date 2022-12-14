@@ -132,10 +132,10 @@ app.post('/login',(req,res)=>{
 })
 
 //회원가입 페이지
-app.get('/registor',(req, res)=>{
-    res.render("registor");
+app.get('/register',(req, res)=>{
+    res.render("register");
 });
-app.post('/registor', (req, res)=>{
+app.post('/register', (req, res)=>{
     const ID = req.body.ID;
     const password = req.body.password;
     const email = req.body.email;
@@ -147,7 +147,7 @@ app.post('/registor', (req, res)=>{
             con.query('INSERT INTO customer (id, password, email) VALUES (?,?,?)',[ID,password,email])
             res.send("<script>location.href='/'</script>");
         }else{
-            res.send("<script>alert('해당 ID가 이미 존재합니다');location.href='/registor'</script>");
+            res.send("<script>alert('해당 ID가 이미 존재합니다');location.href='/register'</script>");
         };     
     });
 });

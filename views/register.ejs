@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Register Form</title>
         <link href="stylesheets/main.css" rel="stylesheet" />
-		<link href="stylesheets/registor.css" rel="stylesheet" />
+		<link href="stylesheets/register.css" rel="stylesheet" />
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<script>
@@ -48,16 +48,16 @@
                 </div>
             </div>
         </nav>
-		<!-- Registor-->
-		<div class="register-form bg-registor">
+		<!-- Register-->
+		<div class="register-form bg-register">
 			<h1>Register Form</h1>
-			<form id ='registor' action="/registor" method="POST" onsubmit="return check();">
+			<form id ='register' action="/register" method="POST" onsubmit="return check();">
 				<input class ="information" type="text" name="ID" placeholder="ID" required>
 				<input class ="information" id="pw1" type="password" name="password" placeholder="Password" required>
 				<input class ="information" id="pw2" type="password" name="password2" placeholder="Password" required>
 				<button style="margin-bottom:1rem" class="btn btn-outline-dark fw-bolder ajax" id="confirm">비밀번호 일치 확인</button>
 				<input class ="information" type="email" name="email" placeholder="email" required>
-				<input class ="registor bg-wimos" type="submit" value="Register">
+				<input class ="register bg-wimos" type="submit" value="Register">
 			</form>
 			<p>
 			<a href="/login"><button class = "button bg-wimos">Goto Login</button></a>
